@@ -106,6 +106,10 @@ class SweepOrchestrator(WorkerStageMixin, FrontendStageMixin, BenchmarkStageMixi
             self.config.name,
             "--log-dir",
             str(self.runtime.log_dir),
+            "--nats-binary",
+            "/home/ubuntu/.local/bin/nats-server",
+            "--etcd-binary",
+            "/home/ubuntu/.local/bin/etcd"
         ]
 
         mounts = dict(self.runtime.container_mounts)
