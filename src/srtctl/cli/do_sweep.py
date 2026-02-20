@@ -105,13 +105,13 @@ class SweepOrchestrator(WorkerStageMixin, FrontendStageMixin, BenchmarkStageMixi
             "--name",
             self.config.name,
             "--log-dir",
-            str(self.runtime.log_dir),
-            "--nats-binary",
-            "/home/ubuntu/.local/bin/nats-server",
-            "--etcd-binary",
-            "/home/ubuntu/.local/bin/etcd"
+            str(self.runtime.log_dir)
         ]
 
+            #"--nats-binary",
+            #"/home/ubuntu/.local/bin/nats-server",
+            #"--etcd-binary",
+            #"/home/ubuntu/.local/bin/etcd"
         mounts = dict(self.runtime.container_mounts)
         mounts[setup_script] = setup_script_container
         # Mount host /tmp to container /host-tmp for etcd/nats data on local storage
