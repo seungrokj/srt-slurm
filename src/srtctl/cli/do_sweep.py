@@ -131,12 +131,12 @@ class SweepOrchestrator(WorkerStageMixin, FrontendStageMixin, BenchmarkStageMixi
         )
 
         logger.info("Waiting for NATS (port 4222) on %s...", infra_node)
-        if not wait_for_port(infra_node, 4222, timeout=60):
+        if not wait_for_port(infra_node, 4222, timeout=600):
             raise RuntimeError("NATS failed to start")
         logger.info("NATS is ready")
 
         logger.info("Waiting for etcd (port 2379) on %s...", infra_node)
-        if not wait_for_port(infra_node, 2379, timeout=60):
+        if not wait_for_port(infra_node, 2379, timeout=600):
             raise RuntimeError("etcd failed to start")
         logger.info("etcd is ready")
 
