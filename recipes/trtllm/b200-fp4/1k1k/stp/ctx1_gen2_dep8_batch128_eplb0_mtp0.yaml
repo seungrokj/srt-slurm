@@ -29,7 +29,8 @@ backend:
     TRTLLM_WORKER_DISABLE_GC: "1"
     UCX_CUDA_IPC_ENABLE_MNNVL: "n"
     UCX_RNDV_SCHEME: "put_zcopy"
-    
+    FLASHINFER_WORKSPACE_BASE: "/tmp_flashinfer_cache"
+     
   decode_environment:
     NCCL_GRAPH_MIXING_SUPPORT: "0"
     OMPI_MCA_coll_ucc_enable: "0"
@@ -39,6 +40,7 @@ backend:
     TRTLLM_WORKER_DISABLE_GC: "1"
     UCX_CUDA_IPC_ENABLE_MNNVL: "n"
     UCX_RNDV_SCHEME: "put_zcopy"
+    FLASHINFER_WORKSPACE_BASE: "/tmp_flashinfer_cache"
     
   trtllm_config:
     prefill:
