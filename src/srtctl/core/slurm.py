@@ -218,7 +218,7 @@ def start_srun_process(
         srun_cmd.extend(["--output", output])
 
     # Cache mgmt
-    srun_cmd.extend(["--container-writable "])
+    #srun_cmd.extend(["--container-writable "])
     srun_cmd.extend(["--export=ALL "])
     
     # Container options
