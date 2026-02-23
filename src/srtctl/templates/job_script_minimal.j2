@@ -75,13 +75,13 @@ mkdir -p "${SRTCTL_INSTALL_DIR}"
 export SRTCTL_SOURCE_DIR="${SRTCTL_SOURCE}"
 
 # Workaroud
-export FLASHINFER_WORKSPACE_BASE="/tmp"
+export FLASHINFER_WORKSPACE_BASE="/tmp_flashinfer_cache"
 
 echo ""
 echo "Installing srtctl dependencies via container..."
 srun --nodes=1 --ntasks=1 --nodelist="${HEAD_NODE}" \
     --container-image="{{ container_image }}" \
-    --container-mounts="${SRTCTL_SOURCE}:/srtctl-src,${SRTCTL_INSTALL_DIR}:/srtctl-install,/home/ubuntu/cache_flashinfer:/tmp" \
+    --container-mounts="${SRTCTL_SOURCE}:/srtctl-src,${SRTCTL_INSTALL_DIR}:/srtctl-install,/home/ubuntu/cache_flashinfer:/tmp_flashinfer_cache" \
     pip install --quiet --target=/srtctl-install /srtctl-src
 
 export PYTHONPATH="${SRTCTL_INSTALL_DIR}:${PYTHONPATH}"
@@ -101,7 +101,7 @@ echo ""
 # Output goes to SLURM's --output (sweep_%j.log)
 set +e  # Temporarily disable exit-on-error to capture exit code
 # Workaroud
-export FLASHINFER_WORKSPACE_BASE="/tmp"
+export FLASHINFER_WORKSPACE_BASE="/tmp_flashinfer_cache"
 python3 -u -m srtctl.cli.do_sweep "{{ config_path }}"
 EXIT_CODE=$?
 set -e  # Re-enable exit-on-error
