@@ -139,13 +139,17 @@ class FrontendStageMixin:
             f"nginx -c {container_config_path} -g 'daemon off;'",
         ]
 
-        print("[OMG] mount", self.runtime.container_mounts)
+        print("[BEFORE] mount", self.runtime.container_mounts)
         nginx_mount = self.runtime.container_mounts
-
+        
         nginx_mount_path = self.runtime.log_dir / "cache_nginx"
         Path(nginx_mount_path).mkdir(parents=True, exist_ok=True)  
         nginx_mount[nginx_mount_path] = "/var/cache/nginx/"
 
+        flashinfer_mount_path = self.runtime.log_dir / "cache_flashinfer"
+        Path(flashinfer_mount_path).mkdir(parents=True, exist_ok=True)  
+        nginx_mount[flashinfer_mount_path] = "/home/dynamo/.cache/flashinfer"
+        
         proc = start_srun_process(
             command=cmd,
             nodelist=[topology.nginx_node],
