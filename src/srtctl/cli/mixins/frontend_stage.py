@@ -141,7 +141,9 @@ class FrontendStageMixin:
 
         print("[OMG] mount", self.runtime.container_mounts)
         nginx_mount = self.runtime.container_mounts
+
         nginx_mount_path = self.runtime.log_dir / "cache_nginx"
+        Path(nginx_mount_path).mkdir(parents=True, exist_ok=True)  
         nginx_mount[nginx_mount_path] = "/var/cache/nginx/"
 
         proc = start_srun_process(
