@@ -149,7 +149,7 @@ class FrontendStageMixin:
         flashinfer_mount_path = self.runtime.log_dir / "cache_flashinfer"
         Path(flashinfer_mount_path).mkdir(parents=True, exist_ok=True)  
         import os
-        os.chmod(flashinfer_mount_path, 0o755) 
+        os.chmod(flashinfer_mount_path, 0o777) 
         nginx_mount[flashinfer_mount_path] = "/home/dynamo/.cache/flashinfer"
         
         proc = start_srun_process(
