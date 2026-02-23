@@ -116,8 +116,7 @@ class WorkerStageMixin:
             "NATS_SERVER": f"nats://{self.runtime.nodes.infra}:4222",
             "DYN_SYSTEM_PORT": str(process.sys_port),
             "DYN_REQUEST_PLANE": "nats",
-            "FLASHINFER_WORKSPACE_DIR": "/tmp",
-            "FLASHINFER_CACHE_DIR": "/tmp/cache",
+            "FLASHINFER_WORKSPACE_BASE": "/tmp_flashinfer_cache",
         }
 
         # Add mode-specific environment variables from backend
@@ -230,8 +229,7 @@ class WorkerStageMixin:
             "ETCD_ENDPOINTS": f"http://{self.runtime.nodes.infra}:2379",
             "NATS_SERVER": f"nats://{self.runtime.nodes.infra}:4222",
             "DYN_SYSTEM_PORT": str(leader.sys_port),
-            "FLASHINFER_WORKSPACE_DIR": "/tmp",
-            "FLASHINFER_CACHE_DIR": "/tmp/cache",
+            "FLASHINFER_WORKSPACE_BASE": "/tmp_flashinfer_cache",
         }
 
         # Add mode-specific environment variables from backend
