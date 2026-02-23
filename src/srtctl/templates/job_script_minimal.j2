@@ -87,6 +87,9 @@ echo "Installed to ${SRTCTL_INSTALL_DIR}"
 {% if setup_script %}
 # Custom setup script override from CLI
 export SRTCTL_SETUP_SCRIPT="{{ setup_script }}"
+
+export FLASHINFER_WORKSPACE_DIR="/tmp"
+export FLASHINFER_CACHE_DIR="/tmp"
 {% endif %}
 
 echo "Running orchestrator on host (with srun access)..."
