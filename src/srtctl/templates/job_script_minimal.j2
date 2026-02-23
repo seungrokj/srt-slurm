@@ -74,6 +74,9 @@ SRTCTL_INSTALL_DIR="${OUTPUT_DIR}/.srtctl_install"
 mkdir -p "${SRTCTL_INSTALL_DIR}"
 export SRTCTL_SOURCE_DIR="${SRTCTL_SOURCE}"
 
+# Workaroud
+export FLASHINFER_WORKSPACE_BASE="/tmp"
+
 echo ""
 echo "Installing srtctl dependencies via container..."
 srun --nodes=1 --ntasks=1 --nodelist="${HEAD_NODE}" \
@@ -83,10 +86,6 @@ srun --nodes=1 --ntasks=1 --nodelist="${HEAD_NODE}" \
 
 export PYTHONPATH="${SRTCTL_INSTALL_DIR}:${PYTHONPATH}"
 echo "Installed to ${SRTCTL_INSTALL_DIR}"
-
-# Workaroud
-export FLASHINFER_WORKSPACE_DIR="/tmp"
-export FLASHINFER_CACHE_DIR="/tmp"
 
 {% if setup_script %}
 # Custom setup script override from CLI
@@ -101,6 +100,8 @@ echo ""
 # The orchestrator will spawn containerized workers
 # Output goes to SLURM's --output (sweep_%j.log)
 set +e  # Temporarily disable exit-on-error to capture exit code
+# Workaroud
+export FLASHINFER_WORKSPACE_BASE="/tmp"
 python3 -u -m srtctl.cli.do_sweep "{{ config_path }}"
 EXIT_CODE=$?
 set -e  # Re-enable exit-on-error
