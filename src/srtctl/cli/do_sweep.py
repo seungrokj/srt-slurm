@@ -115,12 +115,6 @@ class SweepOrchestrator(WorkerStageMixin, FrontendStageMixin, BenchmarkStageMixi
             
         mounts = dict(self.runtime.container_mounts)
         mounts[setup_script] = setup_script_container
-
-        # NGINX
-        setup_nginx = Path(__file__).parent 
-        setup_nginx = Path(__file__).parent
-        mounts[setup_nginx] = "/var/cache/nginx"
-        mounts[setup_nginx] = "/var/run"
                 
         # Mount host /tmp to container /host-tmp for etcd/nats data on local storage
         # This ensures etcd WAL writes go to fast local disk, not network storage
