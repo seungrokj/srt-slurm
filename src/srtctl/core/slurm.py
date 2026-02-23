@@ -207,6 +207,7 @@ def start_srun_process(
 
     srun_cmd.extend(["--nodes", str(nodes)])
     srun_cmd.extend(["--ntasks", str(ntasks)])
+    srun_cmd.extend(["--export=ALL"])
 
     if cpus_per_task:
         srun_cmd.extend(["--cpus-per-task", str(cpus_per_task)])
