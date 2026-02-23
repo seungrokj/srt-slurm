@@ -217,7 +217,7 @@ def start_srun_process(
     if output:
         srun_cmd.extend(["--output", output])
 
-    srun_cmd.extend(["--container-writable "])
+    #srun_cmd.extend(["--container-writable "])
     srun_cmd.extend(["--export=ALL ")
 
     # Container options
