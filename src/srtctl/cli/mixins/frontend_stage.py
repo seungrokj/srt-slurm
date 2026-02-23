@@ -162,6 +162,7 @@ class FrontendStageMixin:
             use_bash_wrapper=False,  # Already wrapped in bash -c
             srun_options={
                 "container-remap-root": "",
+                "export": "FLASHINFER_WORKSPACE_DIR=/tmp/",
             },
         )
 
