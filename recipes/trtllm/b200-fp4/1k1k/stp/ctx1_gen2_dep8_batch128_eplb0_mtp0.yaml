@@ -32,6 +32,9 @@ backend:
     FLASHINFER_WORKSPACE_BASE: "/model"
     HF_HOME: "/model"
     HF_HUB_CACHE: "/model"
+    TRITON_CACHE_DIR: "/model"
+    TRITON_OVERRIDE_DIR: "/model"
+    TRITON_DUMP_DIR: "/model"
      
   decode_environment:
     NCCL_GRAPH_MIXING_SUPPORT: "0"
@@ -45,6 +48,9 @@ backend:
     FLASHINFER_WORKSPACE_BASE: "/model"
     HF_HOME: "/model"
     HF_HUB_CACHE: "/model"
+    TRITON_CACHE_DIR: "/model"
+    TRITON_OVERRIDE_DIR: "/model"
+    TRITON_DUMP_DIR: "/model"
     
   trtllm_config:
     prefill:
