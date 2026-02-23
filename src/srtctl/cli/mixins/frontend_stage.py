@@ -150,8 +150,8 @@ class FrontendStageMixin:
         #Path(flashinfer_mount_path).mkdir(parents=True, exist_ok=True)  
         #import os
         #os.chmod(flashinfer_mount_path, 0o777) 
-        flashinfer_mount_path = "/home/dynamo/.cache/flashinfer"      
-        nginx_mount[flashinfer_mount_path] = "/home/dynamo/.cache/flashinfer"
+        flashinfer_mount_path = "/home/ubuntu/cache_flashinfer"      
+        nginx_mount[flashinfer_mount_path] = "/tmp_flashinfer_cache"
         
         proc = start_srun_process(
             command=cmd,
@@ -163,8 +163,7 @@ class FrontendStageMixin:
             use_bash_wrapper=False,  # Already wrapped in bash -c
             srun_options={
                 "container-remap-root": "",
-                "export": "FLASHINFER_WORKSPACE_DIR=/tmp/",
-            },
+                },
         )
 
         return ManagedProcess(
