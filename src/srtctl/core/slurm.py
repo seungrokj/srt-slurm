@@ -219,7 +219,7 @@ def start_srun_process(
 
     # Cache mgmt
     #srun_cmd.extend(["--container-writable "])
-    srun_cmd.extend(["--export=ALL "])
+    #srun_cmd.extend(["--export=ALL "])
     
     # Container options
     if container_image:
