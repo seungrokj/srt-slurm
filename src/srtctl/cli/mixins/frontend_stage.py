@@ -139,12 +139,18 @@ class FrontendStageMixin:
             f"nginx -c {container_config_path} -g 'daemon off;'",
         ]
 
+        print("[OMG] mount", self.runtime.container_mounts)
+        nginx_mount = self.runtime.container_mount
+        nginx_mount_path = self.runtime.log_dir + "cache_nginx"
+        nginx_mount[nginx_mount_path] = "/var/cache/nginx/"
+
         proc = start_srun_process(
             command=cmd,
             nodelist=[topology.nginx_node],
             output=str(nginx_log),
             container_image=self.config.frontend.nginx_container,
-            container_mounts=self.runtime.container_mounts,
+            #container_mounts=self.runtime.container_mounts,
+            container_mounts=nginx_mount,
             use_bash_wrapper=False,  # Already wrapped in bash -c
             srun_options={
                 "container-remap-root": "",
