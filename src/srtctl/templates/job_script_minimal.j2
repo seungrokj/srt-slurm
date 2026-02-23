@@ -81,7 +81,7 @@ echo ""
 echo "Installing srtctl dependencies via container..."
 srun --nodes=1 --ntasks=1 --nodelist="${HEAD_NODE}" \
     --container-image="{{ container_image }}" \
-    --container-mounts="${SRTCTL_SOURCE}:/srtctl-src,${SRTCTL_INSTALL_DIR}:/srtctl-install,/home/ubuntu/cache_flashinfer:/home/dynamo/.cache/flashinfer" \
+    --container-mounts="${SRTCTL_SOURCE}:/srtctl-src,${SRTCTL_INSTALL_DIR}:/srtctl-install,/home/ubuntu/cache_flashinfer:/tmp" \
     pip install --quiet --target=/srtctl-install /srtctl-src
 
 export PYTHONPATH="${SRTCTL_INSTALL_DIR}:${PYTHONPATH}"
