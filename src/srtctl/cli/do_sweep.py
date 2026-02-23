@@ -214,10 +214,11 @@ class SweepOrchestrator(WorkerStageMixin, FrontendStageMixin, BenchmarkStageMixi
         exit_code = 1
 
         try:
-            # Stage 1: Head infrastructure (NATS, etcd)
-            reporter.report(JobStatus.STARTING, JobStage.HEAD_INFRASTRUCTURE, "Starting head infrastructure")
-            head_proc = self.start_head_infrastructure(registry)
-            registry.add_process(head_proc)
+            if 0:
+                # Stage 1: Head infrastructure (NATS, etcd)
+                reporter.report(JobStatus.STARTING, JobStage.HEAD_INFRASTRUCTURE, "Starting head infrastructure")
+                head_proc = self.start_head_infrastructure(registry)
+                registry.add_process(head_proc)
 
             # Stage 2: Workers
             reporter.report(JobStatus.WORKERS, JobStage.WORKERS, "Starting workers")
