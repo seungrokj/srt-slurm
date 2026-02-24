@@ -196,7 +196,6 @@ class TRTLLMProtocol:
             "--duration=10",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
-            "--sample=none",
             "--stop-on-exit=true",
             "trtllm-llmapi-launch",
             "python3",
