@@ -11,8 +11,8 @@ resources:
   prefill_workers: 1
   gpus_per_prefill: 4
 
-  decode_workers: 2
-  decode_nodes: 2
+  decode_workers: 1
+  decode_nodes: 1
 
   gpus_per_node: 8
 
@@ -29,7 +29,7 @@ backend:
     TRTLLM_WORKER_DISABLE_GC: "1"
     UCX_CUDA_IPC_ENABLE_MNNVL: "n"
     UCX_RNDV_SCHEME: "put_zcopy"
-    FLASHINFER_WORKSPACE_BASE: "/model"
+    FLASHINFER_WORKSPACE_BASE: "/model/prefill"
     HF_HOME: "/model"
     HF_HUB_CACHE: "/model"
     TRITON_CACHE_DIR: "/model"
@@ -45,7 +45,7 @@ backend:
     TRTLLM_WORKER_DISABLE_GC: "1"
     UCX_CUDA_IPC_ENABLE_MNNVL: "n"
     UCX_RNDV_SCHEME: "put_zcopy"
-    FLASHINFER_WORKSPACE_BASE: "/model"
+    FLASHINFER_WORKSPACE_BASE: "/model/decode"
     HF_HOME: "/model"
     HF_HUB_CACHE: "/model"
     TRITON_CACHE_DIR: "/model"
