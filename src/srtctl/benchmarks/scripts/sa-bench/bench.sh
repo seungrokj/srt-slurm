@@ -51,23 +51,24 @@ mkdir -p "$result_dir"
 
 for concurrency in "${CONCURRENCY_LIST[@]}"; do
 
-    num_warmup_prompts=$((concurrency * 2))
-    python3 -u "${WORK_DIR}/benchmark_serving.py" \
-        --model "${MODEL_NAME}" --tokenizer "${MODEL_PATH}" \
-        --host "$HOST" --port "$PORT" \
-        --backend "dynamo" --endpoint /v1/completions \
-        --disable-tqdm \
-        --dataset-name random \
-        --num-prompts "$num_warmup_prompts" \
-        --random-input-len "$ISL" \
-        --random-output-len "$OSL" \
-        --random-range-ratio 0.8 \
-        --ignore-eos \
-        --request-rate 250 \
-        --percentile-metrics ttft,tpot,itl,e2el \
-        --max-concurrency "$concurrency"
+    #num_warmup_prompts=$((concurrency * 2))
+    #python3 -u "${WORK_DIR}/benchmark_serving.py" \
+    #    --model "${MODEL_NAME}" --tokenizer "${MODEL_PATH}" \
+    #    --host "$HOST" --port "$PORT" \
+    #    --backend "dynamo" --endpoint /v1/completions \
+    #    --disable-tqdm \
+    #    --dataset-name random \
+    #    --num-prompts "$num_warmup_prompts" \
+    #    --random-input-len "$ISL" \
+    #    --random-output-len "$OSL" \
+    #    --random-range-ratio 0.8 \
+    #    --ignore-eos \
+    #    --request-rate 250 \
+    #    --percentile-metrics ttft,tpot,itl,e2el \
+    #    --max-concurrency "$concurrency"
 
-    num_prompts=$((concurrency * 10))
+    #num_prompts=$((concurrency * 10))
+    num_prompts=$((concurrency * 1))
     
     # Generate result filename based on mode
     if [ "$IS_DISAGGREGATED" = "true" ]; then

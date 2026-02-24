@@ -111,12 +111,27 @@ backend:
       stream_interval: 100
       num_postprocess_workers: 4
 
+#benchmark:
+#  type: "sa-bench"
+#  isl: 1024
+#  osl: 1024
+#  concurrencies: "2192"
+#  req_rate: "inf"
+
 benchmark:
-  type: "sa-bench"
+  type: "manual"
+
+profiling:
+  type: "nsys"
   isl: 1024
   osl: 1024
-  concurrencies: "2192"
-  req_rate: "inf"
+  concurrency: 2192
+  prefill:
+    start_step: 0 
+    stop_step: 100
+  decode:
+    start_step: 0
+    stop_step: 100
 
 frontend:
   nginx_container: "nginx-sqsh"
