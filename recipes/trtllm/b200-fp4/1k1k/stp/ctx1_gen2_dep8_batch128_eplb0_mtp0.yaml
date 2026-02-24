@@ -114,9 +114,10 @@ backend:
 benchmark:
   type: "sa-bench"
   isl: 1024
-  osl: 1024
-  concurrencies: "2192"
+  osl: 10
+  oncurrencies: "128
   req_rate: "inf"
+# concurrencies: "2192"
 
 frontend:
   nginx_container: "nginx-sqsh"
