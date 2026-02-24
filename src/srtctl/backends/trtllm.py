@@ -161,6 +161,7 @@ class TRTLLMProtocol:
         container_model_path = Path("/model")
 
         cmd = [
+            "trtllm-llmapi-launch",
             "nsys",
             "profile",
             "-o",
@@ -170,7 +171,6 @@ class TRTLLMProtocol:
             "--sample=none",
             "--cpuctxsw=none",
             "--force-overwrite=true",
-            "trtllm-llmapi-launch",
             "python3",
             "-m",
             "dynamo.trtllm",
