@@ -161,7 +161,8 @@ class TRTLLMProtocol:
         container_model_path = Path("/model")
 
         cmd = [
-            "nsysprofile",
+            "nsys",
+            "profile",
             "-o",
             "trtllm_mgpu",
             "--trace=cuda,nvtx,osrt,nvlink",
