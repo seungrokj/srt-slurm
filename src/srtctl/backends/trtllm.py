@@ -165,7 +165,7 @@ class TRTLLMProtocol:
             "profile",
             "-o",
             "trtllm_mgpu",
-            "--trace=cuda,nvtx,osrt,nvlink",
+            "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
             "--sample=none",
             "--cpuctxsw=none",
