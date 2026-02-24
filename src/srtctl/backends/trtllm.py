@@ -159,18 +159,41 @@ class TRTLLMProtocol:
         # (model_path is mounted to /model, log_dir is mounted to /logs)
         container_config_path = Path("/logs") / config_filename
         container_model_path = Path("/model")
-
+        if 0:
+            cmd = [
+                "trtllm-llmapi-launch",
+                "nsys",
+                "profile",
+                "-o",
+                "/model/$(date +%Y%m%d_%H%M%S)_trtllm_mgpu",
+                "--trace=cuda,nvtx,osrt",
+                "--cuda-memory-usage=true",
+                "--sample=none",
+                "--cpuctxsw=none",
+                "--force-overwrite=true",
+                "python3",
+                "-m",
+                "dynamo.trtllm",
+                "--model-path",
+                str(container_model_path),
+                "--served-model-name",
+                runtime.model_path.name,
+                "--disaggregation-mode",
+                mode,
+                "--extra-engine-args",
+                str(container_config_path),
+                "--request-plane",
+                "nats",
+            ]
         cmd = [
             "trtllm-llmapi-launch",
             "nsys",
             "profile",
-            "-o",
-            "/model/$(date +%Y%m%d_%H%M%S)_trtllm_mgpu",
+            "--output=/model/report_%q{SLURM_PROCID}",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
             "--sample=none",
-            "--cpuctxsw=none",
-            "--force-overwrite=true",
+            "--stop-on-exit=true",
             "python3",
             "-m",
             "dynamo.trtllm",
