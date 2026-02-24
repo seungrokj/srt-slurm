@@ -197,6 +197,7 @@ class TRTLLMProtocol:
             "--delay=10",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
+            "trtllm-llmapi-launch",
             "python3",
             "-m",
             "dynamo.trtllm",
