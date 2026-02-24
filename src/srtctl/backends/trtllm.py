@@ -185,18 +185,17 @@ class TRTLLMProtocol:
                 "--request-plane",
                 "nats",
             ]
+        nsys_path=runtime.log_dir / f"{process.endpoint_mode}_nsys_report"
         cmd = [
             "nsys",
             "profile",
-            "--output=/model/report_nsys",
+            "-o",
+            str(nsys_path),
             "--sample=none",
             "--cpuctxsw=none",
             "--force-overwrite=true",
-            "--delay=120",
-            "--duration=10",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
-            "--stop-on-exit=true",
             "trtllm-llmapi-launch",
             "python3",
             "-m",
