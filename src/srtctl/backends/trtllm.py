@@ -187,6 +187,7 @@ class TRTLLMProtocol:
             ]
         nsys_path=runtime.log_dir / f"{process.endpoint_mode}_nsys_report"
         cmd = [
+            "trtllm-llmapi-launch",
             "nsys",
             "profile",
             "-o",
@@ -197,7 +198,6 @@ class TRTLLMProtocol:
             "--delay=120",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
-            "trtllm-llmapi-launch",
             "python3",
             "-m",
             "dynamo.trtllm",
