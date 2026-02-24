@@ -164,7 +164,7 @@ class TRTLLMProtocol:
             "nsys",
             "profile",
             "-o",
-            "trtllm_mgpu",
+            "/model/$(date +%Y%m%d_%H%M%S)_trtllm_mgpu",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
             "--sample=none",
