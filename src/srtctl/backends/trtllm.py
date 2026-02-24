@@ -185,7 +185,7 @@ class TRTLLMProtocol:
                 "--request-plane",
                 "nats",
             ]
-        nsys_path=runtime.log_dir / f"{process.endpoint_mode}_nsys_report"
+        nsys_path = f"/logs/{process.endpoint_mode}_nsys_report"
         cmd = [
             "trtllm-llmapi-launch",
             "nsys",

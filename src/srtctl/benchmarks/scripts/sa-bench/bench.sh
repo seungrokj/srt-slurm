@@ -5,6 +5,8 @@
 # SA-Bench: Throughput/latency benchmark
 # Expects: endpoint isl osl concurrencies req_rate model_name is_disaggregated total_gpus prefill_gpus decode_gpus
 
+sleep 30
+
 set -e
 
 ENDPOINT=$1
