@@ -195,7 +195,6 @@ class TRTLLMProtocol:
             "--sample=none",
             "--cpuctxsw=none",
             "--force-overwrite=true",
-            "--delay=120",
             "--trace=cuda,nvtx,osrt",
             "--cuda-memory-usage=true",
             "python3",
