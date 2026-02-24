@@ -83,12 +83,8 @@ start_profile_on_worker() {
         ACTIVITIES='["CUDA_PROFILER"]'
     fi
     
-    #echo "Starting profiling on http://${ip}:30000 (steps ${start_step}-${stop_step})"
-    #curl -sS -X POST "http://${ip}:30000/start_profile" \
-    #    -H "Content-Type: application/json" \
-    #    -d "{\"start_step\": ${start_step}, \"num_steps\": ${num_steps}, \"activities\": ${ACTIVITIES}}" || true
-    echo "Starting profiling on http://${ip}:8000 (steps ${start_step}-${stop_step})"
-    curl -sS -X POST "http://${ip}:8000/start_profile" \
+    echo "Starting profiling on http://${ip}:30000 (steps ${start_step}-${stop_step})"
+    curl -sS -X POST "http://${ip}:30000/start_profile" \
         -H "Content-Type: application/json" \
         -d "{\"start_step\": ${start_step}, \"num_steps\": ${num_steps}, \"activities\": ${ACTIVITIES}}" || true
 }
@@ -130,32 +126,32 @@ for ip in "${AGG_IPS[@]}"; do
     start_profile_on_worker "${ip}" "${agg_start}" "${agg_stop}"
 done
 
-## Only the prefill profiling job needs to generate traffic through the router.
-#if [[ "${PROFILING_MODE}" == "prefill" ]]; then
-#    echo ""
-#    echo "Generating profiling traffic..."
-#    python3 -m sglang.bench_serving \
-#        --backend sglang \
-#        --model "${model_name}" \
-#        --host "${head_node}" --port "${head_port}" \
-#        --dataset-name random \
-#        --max-concurrency "${PROFILE_CONCURRENCY}" \
-#        --num-prompts 128 \
-#        --random-input-len "${PROFILE_ISL}" \
-#        --random-output-len "${PROFILE_OSL}" \
-#        --random-range-ratio 1 \
-#        --warmup-request 0
-#
-#    # Run lm-eval for additional profiling coverage
-#    echo ""
-#    echo "Running lm-eval..."
-#    pip install lm-eval tenacity > /dev/null 2>&1
-#    python -m lm_eval \
-#        --model local-completions \
-#        --tasks gsm8k \
-#        --model_args "base_url=http://${head_node}:${head_port}/v1/completions,model=${model_name},tokenized_requests=False,tokenizer_backend=None,num_concurrent=${PROFILE_CONCURRENCY},timeout=6000,max_retries=1" \
-#        --limit 10
-#fi
+# Only the prefill profiling job needs to generate traffic through the router.
+if [[ "${PROFILING_MODE}" == "prefill" ]]; then
+    echo ""
+    echo "Generating profiling traffic..."
+    python3 -m sglang.bench_serving \
+        --backend sglang \
+        --model "${model_name}" \
+        --host "${head_node}" --port "${head_port}" \
+        --dataset-name random \
+        --max-concurrency "${PROFILE_CONCURRENCY}" \
+        --num-prompts 128 \
+        --random-input-len "${PROFILE_ISL}" \
+        --random-output-len "${PROFILE_OSL}" \
+        --random-range-ratio 1 \
+        --warmup-request 0
+
+    # Run lm-eval for additional profiling coverage
+    echo ""
+    echo "Running lm-eval..."
+    pip install lm-eval tenacity > /dev/null 2>&1
+    python -m lm_eval \
+        --model local-completions \
+        --tasks gsm8k \
+        --model_args "base_url=http://${head_node}:${head_port}/v1/completions,model=${model_name},tokenized_requests=False,tokenizer_backend=None,num_concurrent=${PROFILE_CONCURRENCY},timeout=6000,max_retries=1" \
+        --limit 10
+fi
 
 exit_code=$?
 set +x

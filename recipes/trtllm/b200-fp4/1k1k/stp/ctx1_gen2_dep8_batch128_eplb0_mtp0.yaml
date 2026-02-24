@@ -11,8 +11,9 @@ resources:
   prefill_workers: 1
   gpus_per_prefill: 4
 
-  decode_workers: 1
-  decode_nodes: 1
+  decode_workers: 2
+  decode_nodes: 2
+
   gpus_per_node: 8
 
 backend:
@@ -110,27 +111,12 @@ backend:
       stream_interval: 100
       num_postprocess_workers: 4
 
-#benchmark:
-#  type: "sa-bench"
-#  isl: 1024
-#  osl: 1024
-#  concurrencies: "2192"
-#  req_rate: "inf"
-
 benchmark:
-  type: "manual"
-
-profiling:
-  type: "nsys"
+  type: "sa-bench"
   isl: 1024
   osl: 1024
-  concurrency: 2192
-  prefill:
-    start_step: 0 
-    stop_step: 100
-  decode:
-    start_step: 0
-    stop_step: 100
+  concurrencies: "2192"
+  req_rate: "inf"
 
 frontend:
   nginx_container: "nginx-sqsh"
