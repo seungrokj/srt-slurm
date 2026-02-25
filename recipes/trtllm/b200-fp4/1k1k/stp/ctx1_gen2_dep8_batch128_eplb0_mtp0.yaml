@@ -36,7 +36,6 @@ backend:
     TRITON_OVERRIDE_DIR: "/model"
     TRITON_DUMP_DIR: "/model"
     NCCL_P2P_USE_CUDA_MEMCPY: "0" 
-    TLLM_PROFILE_START_STOP: "1-2"
      
   decode_environment:
     NCCL_GRAPH_MIXING_SUPPORT: "0"
@@ -54,7 +53,6 @@ backend:
     TRITON_OVERRIDE_DIR: "/model"
     TRITON_DUMP_DIR: "/model"
     NCCL_P2P_USE_CUDA_MEMCPY: "0" 
-    TLLM_PROFILE_START_STOP: "1-2"
     
   trtllm_config:
     prefill:

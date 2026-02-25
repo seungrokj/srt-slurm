@@ -148,6 +148,11 @@ class TRTLLMProtocol:
         """Build the command to start a TRTLLM worker process."""
 
         mode = process.endpoint_mode
+
+        leader = endpoint_processes[0]
+        mode = leader.endpoint_mode
+        index = leader.endpoint_index
+
         config = self.get_config_for_mode(mode)
 
         # Write config to host path (log_dir)
@@ -196,7 +201,6 @@ class TRTLLMProtocol:
                 "--cpuctxsw=none",
                 "--force-overwrite=true",
                 "--trace=cuda,nvtx,osrt",
-                "--cuda-memory-usage=true",
                 "trtllm-llmapi-launch",
                 "python3",
                 "-m",
@@ -225,8 +229,7 @@ class TRTLLMProtocol:
                 "--force-overwrite=true",
                 "--trace=cuda,nvtx",
                 "--cuda-memory-usage=true",
-                "--capture-range=nvtx",
-                "--capture-range-end=stop",
+                "--delay=300"
                 "trtllm-llmapi-launch",
                 "python3",
                 "-m",
