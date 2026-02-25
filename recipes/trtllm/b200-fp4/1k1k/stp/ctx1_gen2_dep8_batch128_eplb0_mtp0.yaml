@@ -11,8 +11,8 @@ resources:
   prefill_workers: 1
   gpus_per_prefill: 4
 
-  decode_workers: 1
-  decode_nodes: 1
+  decode_workers: 2
+  decode_nodes: 2
 
   gpus_per_node: 8
 
@@ -35,6 +35,7 @@ backend:
     TRITON_CACHE_DIR: "/model"
     TRITON_OVERRIDE_DIR: "/model"
     TRITON_DUMP_DIR: "/model"
+    NCCL_P2P_USE_CUDA_MEMCPY: "0" 
      
   decode_environment:
     NCCL_GRAPH_MIXING_SUPPORT: "0"
@@ -51,6 +52,7 @@ backend:
     TRITON_CACHE_DIR: "/model"
     TRITON_OVERRIDE_DIR: "/model"
     TRITON_DUMP_DIR: "/model"
+    NCCL_P2P_USE_CUDA_MEMCPY: "0" 
     
   trtllm_config:
     prefill:
