@@ -219,7 +219,7 @@ class TRTLLMProtocol:
             "profile",
             "-o",
             str(nsys_path),
-            "--delay=600",
+            "--delay=300",
             "--sample=none",
             "--cpuctxsw=none",
             "--force-overwrite=true",
