@@ -218,7 +218,7 @@ class TRTLLMProtocol:
             ]
 
         if process.endpoint_mode != "prefill" :
-            nsys_path = f"/logs/{process.endpoint_mode}_nsys_report%p"
+            nsys_path = f"/logs/{process.endpoint_mode}_nsys_{index}_report%p"
             cmd = [
                 "nsys",
                 "profile",
