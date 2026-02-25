@@ -185,17 +185,35 @@ class TRTLLMProtocol:
                 "--request-plane",
                 "nats",
             ]
-        nsys_path = f"/logs/{process.endpoint_mode}_nsys_report"
+        if 0:
+            nsys_path = f"/logs/{process.endpoint_mode}_nsys_report"
+            cmd = [
+                "nsys",
+                "profile",
+                "-o",
+                str(nsys_path),
+                "--sample=none",
+                "--cpuctxsw=none",
+                "--force-overwrite=true",
+                "--trace=cuda,nvtx,osrt",
+                "--cuda-memory-usage=true",
+                "trtllm-llmapi-launch",
+                "python3",
+                "-m",
+                "dynamo.trtllm",
+                "--model-path",
+                str(container_model_path),
+                "--served-model-name",
+                runtime.model_path.name,
+                "--disaggregation-mode",
+                mode,
+                "--extra-engine-args",
+                str(container_config_path),
+                "--request-plane",
+                "nats",
+            ]
+
         cmd = [
-            "nsys",
-            "profile",
-            "-o",
-            str(nsys_path),
-            "--sample=none",
-            "--cpuctxsw=none",
-            "--force-overwrite=true",
-            "--trace=cuda,nvtx,osrt",
-            "--cuda-memory-usage=true",
             "trtllm-llmapi-launch",
             "python3",
             "-m",
