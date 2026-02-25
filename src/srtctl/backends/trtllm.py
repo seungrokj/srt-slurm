@@ -214,6 +214,16 @@ class TRTLLMProtocol:
             ]
 
         cmd = [
+            "nsys",
+            "profile",
+            "-o",
+            str(nsys_path),
+            "--delay=600",
+            "--sample=none",
+            "--cpuctxsw=none",
+            "--force-overwrite=true",
+            "--trace=cuda,nvtx,osrt",
+            "--cuda-memory-usage=true",
             "trtllm-llmapi-launch",
             "python3",
             "-m",
