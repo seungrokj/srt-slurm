@@ -229,7 +229,7 @@ class TRTLLMProtocol:
                 "--force-overwrite=true",
                 "--trace=cuda,nvtx",
                 "--cuda-memory-usage=true",
-                "--delay=300"
+                "--delay=300",
                 "trtllm-llmapi-launch",
                 "python3",
                 "-m",
