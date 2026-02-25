@@ -223,7 +223,7 @@ class TRTLLMProtocol:
             "--sample=none",
             "--cpuctxsw=none",
             "--force-overwrite=true",
-            "--trace=cuda,nvtx,osrt",
+            "--trace=cuda",
             "--cuda-memory-usage=true",
             "trtllm-llmapi-launch",
             "python3",
