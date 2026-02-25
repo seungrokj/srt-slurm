@@ -113,7 +113,7 @@ backend:
 
 benchmark:
   type: "sa-bench"
-  isl: 1024
+  isl: 1
   osl: 10
   concurrencies: "128"
   req_rate: "inf"
