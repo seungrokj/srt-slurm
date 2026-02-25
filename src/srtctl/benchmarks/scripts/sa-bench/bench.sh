@@ -104,4 +104,4 @@ done
 
 echo "SA-Bench complete. Results in $result_dir"
 set -x
-sleep 360
+sleep 720
