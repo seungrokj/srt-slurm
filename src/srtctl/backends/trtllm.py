@@ -213,7 +213,7 @@ class TRTLLMProtocol:
                 "nats",
             ]
 
-        nsys_path = f"/logs/{process.endpoint_mode}_nsys_report"
+        nsys_path = f"/logs/{process.endpoint_mode}_nsys_report%p"
         cmd = [
             "nsys",
             "profile",
