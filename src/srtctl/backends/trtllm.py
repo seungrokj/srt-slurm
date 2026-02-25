@@ -217,7 +217,7 @@ class TRTLLMProtocol:
                 "nats",
             ]
 
-        if process.endpoint_mode == "prefill" :
+        if process.endpoint_mode != "prefill" :
             nsys_path = f"/logs/{process.endpoint_mode}_nsys_report%p"
             cmd = [
                 "nsys",
