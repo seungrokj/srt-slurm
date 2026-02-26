@@ -96,6 +96,14 @@ for concurrency in "${CONCURRENCY_LIST[@]}"; do
     #    --max-concurrency "$concurrency" \
     #    --use-chat-template \
     #    --save-result --result-dir "$result_dir" --result-filename "$result_filename"
+
+    echo "READY"
+    echo "READY"
+    echo "READY"
+    echo "READY"
+    echo "READY"
+    sleep 720
+
     pip install --user lm_eval
     pip install --user lm_eval[api]
     lm_eval --model local-completions --model_args '{"model": "'${MODEL_NAME}'", "base_url": "http://localhost:$PORT/v1/completions", "num_concurrent": 32, "max_retries": 10, "max_gen_toks": 2048, "tokenizer_backend":"None","tokenized_requests":"False" }' --tasks gsm8k --batch_size auto --num_fewshot 5 --trust_remote_code --limit 1
