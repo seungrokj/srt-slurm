@@ -102,7 +102,7 @@ for concurrency in "${CONCURRENCY_LIST[@]}"; do
     echo "READY"
     echo "READY"
     echo "READY"
-    sleep 720
+    sleep 7200
 
     pip install --user lm_eval
     pip install --user lm_eval[api]
