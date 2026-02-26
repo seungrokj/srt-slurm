@@ -80,23 +80,26 @@ for concurrency in "${CONCURRENCY_LIST[@]}"; do
     echo "Running benchmark with concurrency: $concurrency"
     echo "$(date '+%Y-%m-%d %H:%M:%S')"
     
-    python3 -u "${WORK_DIR}/benchmark_serving.py" \
-        --model "${MODEL_NAME}" --tokenizer "${MODEL_PATH}" \
-        --host "$HOST" --port "$PORT" \
-        --backend "dynamo" --endpoint /v1/completions \
-        --disable-tqdm \
-        --dataset-name random \
-        --num-prompts "$num_prompts" \
-        --random-input-len "$ISL" \
-        --random-output-len "$OSL" \
-        --random-range-ratio 0.8 \
-        --ignore-eos \
-        --request-rate "${REQ_RATE}" \
-        --percentile-metrics ttft,tpot,itl,e2el \
-        --max-concurrency "$concurrency" \
-        --use-chat-template \
-        --save-result --result-dir "$result_dir" --result-filename "$result_filename"
-    
+    #python3 -u "${WORK_DIR}/benchmark_serving.py" \
+    #    --model "${MODEL_NAME}" --tokenizer "${MODEL_PATH}" \
+    #    --host "$HOST" --port "$PORT" \
+    #    --backend "dynamo" --endpoint /v1/completions \
+    #    --disable-tqdm \
+    #    --dataset-name random \
+    #    --num-prompts "$num_prompts" \
+    #    --random-input-len "$ISL" \
+    #    --random-output-len "$OSL" \
+    #    --random-range-ratio 0.8 \
+    #    --ignore-eos \
+    #    --request-rate "${REQ_RATE}" \
+    #    --percentile-metrics ttft,tpot,itl,e2el \
+    #    --max-concurrency "$concurrency" \
+    #    --use-chat-template \
+    #    --save-result --result-dir "$result_dir" --result-filename "$result_filename"
+    pip install lm_eval
+    pip install lm_eval[api]
+    lm_eval --model local-completions --model_args '{"model": "'${MODEL_NAME}'", "base_url": "http://localhost:$PORT/v1/completions", "num_concurrent": 32, "max_retries": 10, "max_gen_toks": 2048, "tokenizer_backend":"None","tokenized_requests":"False" }' --tasks gsm8k --batch_size auto --num_fewshot 5 --trust_remote_code --limit 1
+     
     echo "$(date '+%Y-%m-%d %H:%M:%S')"
     echo "Completed benchmark with concurrency: $concurrency"
     echo "-----------------------------------------"
