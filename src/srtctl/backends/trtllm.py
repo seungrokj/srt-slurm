@@ -218,7 +218,8 @@ class TRTLLMProtocol:
             ]
 
         #if process.endpoint_mode != "prefill" and index == 0:
-        if process.endpoint_mode != "prefill":
+        #if process.endpoint_mode != "prefill":
+        if 1:
             nsys_path = f"/logs/{process.endpoint_mode}_nsys_{index}_report%p"
             cmd = [
                 "nsys",
@@ -231,6 +232,7 @@ class TRTLLMProtocol:
                 "--trace=cuda,nvtx",
                 "--cuda-memory-usage=true",
                 "--delay=300",
+                "--flush-on-cudaprofilerstop=false",
                 "trtllm-llmapi-launch",
                 "python3",
                 "-m",
